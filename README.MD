@@ -36,17 +36,6 @@
     https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
     https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
-    **1CPU=1000Mi**
-    _RPS=No. of CPU X (1/Task time)_
-    let ust suppose our request take max 5ms per request
-    RPS = 1 X (1/5ms)
-    RPS = 1000/5
-    RPS = 200 of 100% CPU utilization
-    but we will configure our autoscaling on 50% utiliztion of CPU so next pod can be ready.
-    **50% means 100 RPS**
-Links
-    [Requests per second (How much CPU/RAM required)](https://www.linkedin.com/pulse/requests-per-second-how-much-cpuram-required-rishi-kumar "Throughput")
-
 # Step 08: 
     Load testing using "hey" package of GO.
 ## Installation
@@ -57,3 +46,21 @@ Links
         hey -z 5m http://http://chart-example.local/ 
         hey -z 5m -c  250 http://http://chart-example.local/ #250 request at a time 
 
+# CPU calculation
+    **1CPU=1000Mi**
+    _RPS=No. of CPU X (1/Task time)_
+    let ust suppose our request take max 5ms per request
+    RPS = 1 X (1/5ms)
+    RPS = 1000/5
+    RPS = 200 of 100% CPU utilization
+    but we will configure our autoscaling on 50% utiliztion of CPU so next pod can be ready.
+    **50% means 100 RPS**
+Links
+    [Requests per second (How much CPU/RAM required)](https://www.linkedin.com/pulse/requests-per-second-how-much-cpuram-required-rishi-kumar "Throughput")
+    
+# Cost Calculation 
+    let's suppose
+    cost of 1 CPU = 10$
+    1 CPU can hanle approximate 180 request
+    100000/175 =  571.42 approximate
+    10$ X 572$ = 5720 $ 
