@@ -35,7 +35,7 @@
     https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
     https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
-## 04: 
+## Step 04: 
     For Load testing we will use Jmeter.
 
 # CPU calculation
