@@ -10,7 +10,8 @@
     https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
 # Step 03: 
     Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
-    CI/CD pipeline will make sure the updated image is deploy on the cluster.
+    CI/CD pipeline will make sure the updated image is deployed on the cluster.
+    The below steps from 01 to 05 automatically created by helm chart.
 ### References:
     https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
 ## 01:
@@ -25,7 +26,6 @@
     Create a ingress controller with Google cloud external load balancer and rules for backend service map.
 #### References:
     https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
-
 ## 05:
     Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
 #### References:
