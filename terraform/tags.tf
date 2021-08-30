@@ -4,7 +4,7 @@ locals {
 
 locals {
   # Common tags to be assigned to all resources
-  common_tags = {
+  common_labels = {
     Name = local.Rowner
   }
 }
