@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "imageChart.fullname" . }}
+  labels:
+    {{- include "imageChart.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "imageChart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "imageChart.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.serviceAccount.create -}}
+      serviceAccountName: {{ include "imageChart.serviceAccountName" . }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          # args:
+          # - /bin/sh
+          # - -c
+          # - touch /tmp/healthy; sleep 30;
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe: 
+            {{ toYaml .Values.probe.livenessProbe | nindent 12 }}
+          readinessProbe: 
+            {{ toYaml .Values.probe.readinessProbe | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
