@@ -1,32 +1,41 @@
+# Architecture
+![](AssessmentImage.png)
+
 # Step 01:
     Create an application that resize the image on the base of dynamic parameters(width, height, and quality) with watermark.
 
 # Step 02: 
-    Create a Cluster Autoscaler of GKE
+    Create a Cluster Autoscaler of GKE using IaC terraform
 
 ### Refernces: 
     https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
     https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
+    https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
 
-# Step 03:
+# Step 02: 
+    Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster will create below steps automatically.
+
+### References:
+    https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
+## Step 01:
     Create a BackendConfig of enable CDN for cache the content on the google edge nodes.
 
 ### Refernces:
     https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
 
-# Step 04: 
+# Step 02: 
     Create a service with BackendConfig which created as above to access the deployment pods.
 
-# Step 05: 
+## Step 03: 
     Create a deployment for pods with health check(liveness and readiness probe) and resources(reques & limits of CPU & Memory).
 
-# Step 06:
+# Step 04:
     Create a ingress controller with Google cloud external load balancer and rules for backend service map.
 
 ### References:
     https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
 
-# Step 07:
+# Step 05:
     Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
 
 ### References:
@@ -36,15 +45,8 @@
     https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
     https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
-# Step 08: 
-    Load testing using "hey" package of GO.
-## Installation
-        sudo sanp go –classic
-        go get -u github.com/rakyll/hey  "It will use in cloud shell with google-cloud-sdk"
-
-        hey -z 2m -c 25 http://http://chart-example.local/  #25 request at a time
-        hey -z 5m http://http://chart-example.local/ 
-        hey -z 5m -c  250 http://http://chart-example.local/ #250 request at a time 
+# Step 03: 
+    Load testing use Jmeter.
 
 # CPU calculation
     **1CPU=1000Mi**
@@ -57,7 +59,7 @@
     **50% means 100 RPS**
 Links
     [Requests per second (How much CPU/RAM required)](https://www.linkedin.com/pulse/requests-per-second-how-much-cpuram-required-rishi-kumar "Throughput")
-    
+
 # Cost Calculation 
     let's suppose
     cost of 1 CPU = 10$
