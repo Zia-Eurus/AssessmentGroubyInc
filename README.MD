@@ -3,7 +3,7 @@
 # Step 01:
     Create an application that resize the image on the base of dynamic parameters(width, height, and quality) with watermark.
 # Step 02: 
-    Create a Cluster Autoscaler of GKE using IaC terraform
+    Configure the CI/CD Pipeline for Creating the Cluster Autoscaler of GKE using terraform(IaC)
 ### Refernces: 
     https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
     https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
@@ -14,19 +14,19 @@
     The below steps from 01 to 05 automatically created by helm chart.
 ### References:
     https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
-## 01:
+## 01 backendConfig:
     Create a BackendConfig of enable CDN for cache the content on the google edge nodes.
 #### Refernces:
     https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
-## 02: 
+## 02 Service: 
     Create a service with BackendConfig which created as above to access the deployment pods.
-## 03: 
+## 03 Deployment: 
     Create a deployment for pods with health check(liveness and readiness probe) and resources(reques & limits of CPU & Memory).
-## 04:
+## 04 Ingress:
     Create a ingress controller with Google cloud external load balancer and rules for backend service map.
 #### References:
     https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
-## 05:
+## 05 HPA:
     Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
 #### References:
     https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
