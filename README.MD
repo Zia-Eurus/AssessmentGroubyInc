@@ -13,29 +13,30 @@
     https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
 
 # Step 02: 
-    Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster will create below steps automatically.
+    Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
+    CI/CD pipeline will create will automatically .
 
 ### References:
     https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
-## Step 01:
+## 01:
     Create a BackendConfig of enable CDN for cache the content on the google edge nodes.
 
 ### Refernces:
     https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
 
-# Step 02: 
+## 02: 
     Create a service with BackendConfig which created as above to access the deployment pods.
 
-## Step 03: 
+## 03: 
     Create a deployment for pods with health check(liveness and readiness probe) and resources(reques & limits of CPU & Memory).
 
-# Step 04:
+## 04:
     Create a ingress controller with Google cloud external load balancer and rules for backend service map.
 
 ### References:
     https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
 
-# Step 05:
+## 05:
     Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
 
 ### References:
@@ -45,8 +46,8 @@
     https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
     https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
-# Step 03: 
-    Load testing use Jmeter.
+## 06: 
+    For Load testing we will use Jmeter.
 
 # CPU calculation
     **1CPU=1000Mi**
