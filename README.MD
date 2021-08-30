@@ -1,52 +1,41 @@
 # Architecture
 ![](AssessmentImage.png)
-
 # Step 01:
     Create an application that resize the image on the base of dynamic parameters(width, height, and quality) with watermark.
-
 # Step 02: 
     Create a Cluster Autoscaler of GKE using IaC terraform
-
 ### Refernces: 
     https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
     https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
     https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
-
-# Step 02: 
+# Step 03: 
     Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
-    CI/CD pipeline will create will automatically .
-
+    CI/CD pipeline will make sure the updated image is deploy on the cluster.
 ### References:
     https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
 ## 01:
     Create a BackendConfig of enable CDN for cache the content on the google edge nodes.
-
-### Refernces:
+#### Refernces:
     https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
-
 ## 02: 
     Create a service with BackendConfig which created as above to access the deployment pods.
-
 ## 03: 
     Create a deployment for pods with health check(liveness and readiness probe) and resources(reques & limits of CPU & Memory).
-
 ## 04:
     Create a ingress controller with Google cloud external load balancer and rules for backend service map.
-
-### References:
+#### References:
     https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
 
 ## 05:
     Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
-
-### References:
+#### References:
     https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
     https://cloud.google.com/kubernetes-engine/docs/tutorials/autoscaling-metrics#custom-metric_1
     https://github.com/GoogleCloudPlatform/k8s-stackdriver/tree/master/custom-metrics-stackdriver-adapter
     https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
     https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
-## 06: 
+## 04: 
     For Load testing we will use Jmeter.
 
 # CPU calculation
