@@ -36,4 +36,4 @@
 
 
 Links
-    [google drive file link for more details and reference](DetailsDocment.pdf "Detail of READM Detail")
+    [Link for detail pdf documents](DetailsDocment.pdf "Detail of READM Detail")
