@@ -2,6 +2,7 @@
 # GKE cluster
 resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
+  project  = var.project_id
   location = var.region
   
   # We can't create a cluster with no node pool defined, but we want to only use
@@ -13,18 +14,52 @@ resource "google_container_cluster" "primary" {
   network    = var.vpc_name
   subnetwork = var.subnet_name
 
-  cluster_autoscaling = {
-    enabled = var.autoscaling_enable
-    resource_limits = [{ 
-      resource_type = cpu 
-      minimum = 2
-      maximum = 2
-    },{ 
-      resource_type = memory 
-      minimum = 2
-      maximum = 2
+  logging_service    = var.logging_service
+  monitoring_service = var.monitoring_service
+
+  cluster_autoscaling {
+    enabled = var.cluster_autoscaling.enabled
+    dynamic "resource_limits" {
+      for_each = local.autoscaling_resource_limits
+      content {
+        resource_type = lookup(resource_limits.value, "resource_type")
+        minimum       = lookup(resource_limits.value, "minimum")
+        maximum       = lookup(resource_limits.value, "maximum")
+      }
     }
-    ]  
+  }
+
+  vertical_pod_autoscaling {
+    enabled = var.enable_vertical_pod_autoscaling
+  }
+
+  master_auth {
+    username = var.basic_auth_username
+    password = var.basic_auth_password
+
+    client_certificate_config {
+      issue_client_certificate = var.issue_client_certificate
+    }
+  }
+
+  addons_config {
+    http_load_balancing {
+      disabled = !var.http_load_balancing
+    }
+
+    horizontal_pod_autoscaling {
+      disabled = !var.horizontal_pod_autoscaling
+    }
+
+    network_policy_config {
+      disabled = !var.network_policy
+    }
+  }
+
+  timeouts {
+    create = "45m"
+    update = "45m"
+    delete = "45m"
   }
 }
 
@@ -40,7 +75,7 @@ resource "google_container_node_pool" "primary_nodes" {
     max_node_count = var.max_node_count
   }
 
-  node_config {
+  node_config { 
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
@@ -49,9 +84,9 @@ resource "google_container_node_pool" "primary_nodes" {
     labels = {
       env = var.project_id
     }
-
-    # preemptible  = true
-    machine_type = "n1-standard-1"
+     
+    preemptible  = false
+    machine_type = var.machine_type
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"

@@ -4,6 +4,8 @@
     Create an application that resize the image on the base of dynamic parameters(width, height, and quality) with watermark.
 # Step 02: 
     Configure the CI/CD Pipeline for Creating the Cluster Autoscaler of GKE using terraform(IaC)
+Links
+    [Offical github repo for GKE Cluster](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine "GKE Cluster")
 ### Refernces: 
     https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
     https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
