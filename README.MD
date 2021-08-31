@@ -14,7 +14,10 @@
     helm install demoapp helmchart/
 
 # Cluster monitoring
-    We will monitor our cluster with prometheus and grafana. As we configure prometheus to fetch the custom metrics for HPA. 
+    We will monitor our cluster with prometheus and grafana. 
+    As Prometheus is an open-source application used for metrics-based monitoring and alerting. 
+    It calls out to your application, pulls real-time metrics, compresses and stores them in a time-series database.
+    helm install prometheus stable/prometheus-operator
 
 # CPU calculation
     **1CPU=1000Mi**
