@@ -6,36 +6,36 @@
     Configure the CI/CD Pipeline for Creating the Cluster Autoscaler of GKE using terraform(IaC)
 Links
     [Offical github repo for GKE Cluster](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine "GKE Cluster")
-### Refernces: 
-    https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
-    https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
-    https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
+### *References:* 
+    1. https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
+    2. https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
+    3. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
 # Step 03: 
     Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
     CI/CD pipeline will make sure the updated image is deployed on the cluster.
     The below steps from 01 to 05 automatically created by helm chart.
-### References:
-    https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
+### *References:*
+    1. https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
 ## 01 backendConfig:
     Create a BackendConfig of enable CDN for cache the content on the google edge nodes.
-#### Refernces:
-    https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
+#### *References:*
+    1. https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
 ## 02 Service: 
     Create a service with BackendConfig which created as above to access the deployment pods.
 ## 03 Deployment: 
     Create a deployment for pods with health check(liveness and readiness probe) and resources(reques & limits of CPU & Memory).
 ## 04 Ingress:
     Create a ingress controller with Google cloud external load balancer and rules for backend service map.
-#### References:
-    https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
+#### *References:*
+    1. https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
 ## 05 HPA:
     Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
-#### References:
-    https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
-    https://cloud.google.com/kubernetes-engine/docs/tutorials/autoscaling-metrics#custom-metric_1
-    https://github.com/GoogleCloudPlatform/k8s-stackdriver/tree/master/custom-metrics-stackdriver-adapter
-    https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
-    https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
+#### *References:*
+    1. https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
+    2. https://cloud.google.com/kubernetes-engine/docs/tutorials/autoscaling-metrics#custom-metric_1
+    3. https://github.com/GoogleCloudPlatform/k8s-stackdriver/tree/master/custom-metrics-stackdriver-adapter
+    4. https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
+    5. https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
 ## Step 04: 
     For Load testing we will use Jmeter.
@@ -53,8 +53,9 @@ Links
     [Requests per second (How much CPU/RAM required)](https://www.linkedin.com/pulse/requests-per-second-how-much-cpuram-required-rishi-kumar "Throughput")
 
 # Cost Calculation 
+
     let's suppose
     cost of 1 CPU = 10$
     1 CPU can hanle approximate 180 request
     100000/175 =  571.42 approximate
-    10$ X 572$ = 5720 $ 
+    10$ X 572$ = 5720$
