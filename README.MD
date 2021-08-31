@@ -12,11 +12,8 @@
     Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
     Pipeline will make sure the updated image is deployed on the cluster.
     helm install demoapp helmchart/
-
-# Cluster monitoring
-    We will monitor our cluster with prometheus and grafana. 
-    As Prometheus is an open-source application used for metrics-based monitoring and alerting. 
-    It calls out to your application, pulls real-time metrics, compresses and stores them in a time-series database.
+# Step 03 Install Prometheus:
+    It will be installed for monitoring the cluster.
     helm install prometheus stable/prometheus-operator
 
 # CPU calculation
@@ -39,4 +36,4 @@
 
 
 Links
-    [google drive file link for more details and reference](https://drive.google.com/file/d/14UIs5vMRdAosR5jAH_6mpBYLLPzLMkA2/view "Detail of READM Detail")
+    [google drive file link for more details and reference](DetailsDocment.pdf "Detail of READM Detail")
