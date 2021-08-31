@@ -3,7 +3,6 @@ locals {
 }
 
 locals {
-  # Common tags to be assigned to all resources
   common_labels = {
     Name = local.Rowner
   }
@@ -31,12 +30,22 @@ variable "cluster_autoscaling" {
     gpu_resources = list(object({ resource_type = string, minimum = number, maximum = number }))
   })
   default = {
-    enabled       = false
-    max_cpu_cores = 0
-    min_cpu_cores = 0
-    max_memory_gb = 0
-    min_memory_gb = 0
-    gpu_resources = []
+    enabled       = true
+    max_cpu_cores = 2
+    min_cpu_cores = 1
+    max_memory_gb = 2
+    min_memory_gb = 1
+    gpu_resources = [
+       {
+        resource_type = "cpu", 
+        minimum = 2, 
+        maximum = 2
+      },{
+        resource_type = "memory", 
+        minimum = 2, 
+        maximum = 2
+      }
+    ]
   }
   description = "Cluster autoscaling configuration. See [more details](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters#clusterautoscaling)"
 }

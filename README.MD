@@ -1,44 +1,20 @@
+
+# Image Resize App:
+    An application that resize the image on the base of dynamic parameters(width, height, and quality) with watermark.
+
 # Architecture
 ![](AssessmentImage.png)
-# Step 01:
-    Create an application that resize the image on the base of dynamic parameters(width, height, and quality) with watermark.
-# Step 02: 
-    Configure the CI/CD Pipeline for Creating the Cluster Autoscaler of GKE using terraform(IaC)
-Links
-    [Offical github repo for GKE Cluster](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine "GKE Cluster")
-### *References:* 
-    1. https://cloud.google.com/architecture/best-practices-for-running-cost-effective-kubernetes-applications-on-gke
-    2. https://cloud.google.com/kubernetes-engine/docs/best-practices/scalability
-    3. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
-# Step 03: 
-    Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
-    CI/CD pipeline will make sure the updated image is deployed on the cluster.
-    The below steps from 01 to 05 automatically created by helm chart.
-### *References:*
-    1. https://www.velotio.com/engineering-blog/cicd-for-kubernetes-using-circleci-and-helm
-## 01 backendConfig:
-    Create a BackendConfig of enable CDN for cache the content on the google edge nodes.
-#### *References:*
-    1. https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#cloud_cdn
-## 02 Service: 
-    Create a service with BackendConfig which created as above to access the deployment pods.
-## 03 Deployment: 
-    Create a deployment for pods with health check(liveness and readiness probe) and resources(reques & limits of CPU & Memory).
-## 04 Ingress:
-    Create a ingress controller with Google cloud external load balancer and rules for backend service map.
-#### *References:*
-    1. https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress
-## 05 HPA:
-    Create a HPA with custom metric which we can fetch from Prometheus and stackdriver using adapter
-#### *References:*
-    1. https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
-    2. https://cloud.google.com/kubernetes-engine/docs/tutorials/autoscaling-metrics#custom-metric_1
-    3. https://github.com/GoogleCloudPlatform/k8s-stackdriver/tree/master/custom-metrics-stackdriver-adapter
-    4. https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
-    5. https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
 
-## Step 04: 
-    For Load testing we will use Jmeter.
+# Step 01 GKE Cluster: 
+    Configure the CI/CD Pipeline for Creating the Cluster Autoscaler of GKE using terraform(IaC)
+
+# Step 02 Install helm chart: 
+    Configure the CI/CD Pipeline for building the new helm chart and deploy to the cluster.
+    Pipeline will make sure the updated image is deployed on the cluster.
+    helm install demoapp helmchart/
+
+# Cluster monitoring
+    We will monitor our cluster with prometheus and grafana. As we configure prometheus to fetch the custom metrics for HPA. 
 
 # CPU calculation
     **1CPU=1000Mi**
@@ -49,8 +25,6 @@ Links
     RPS = 200 of 100% CPU utilization
     but we will configure our autoscaling on 50% utiliztion of CPU so next pod can be ready.
     **50% means 100 RPS**
-Links
-    [Requests per second (How much CPU/RAM required)](https://www.linkedin.com/pulse/requests-per-second-how-much-cpuram-required-rishi-kumar "Throughput")
 
 # Cost Calculation 
 
@@ -59,3 +33,7 @@ Links
     1 CPU can hanle approximate 180 request
     100000/175 =  571.42 approximate
     10$ X 572$ = 5720$
+
+
+Links
+    [google drive file link for more details and reference](https://drive.google.com/file/d/14UIs5vMRdAosR5jAH_6mpBYLLPzLMkA2/view "Detail of READM Detail")
